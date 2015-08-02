@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+	<head>
+	
+	<base href="/" />
+	
+	<link href='http://fonts.googleapis.com/css?family=Open+Sans:600,400' rel='stylesheet' type='text/css'>
+	
+	<!-- inject:css off-->
+
+	<!-- endinject off-->
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap-theme.css">
+	<link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">	
+	<link rel="stylesheet" href="styles/main.css">
+	
+	</head>
+	<body>
+			
+	    <nav class="navbar navbar-inverse navbar-fixed-top">
+	      <div class="container">
+	        <div class="navbar-header">
+	          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+	            <span class="sr-only">Toggle navigation</span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	            <span class="icon-bar"></span>
+	          </button>
+	          <a class="navbar-brand" href="#">Project name</a>
+	        </div>
+	        <div id="navbar" class="collapse navbar-collapse">
+	          <ul class="nav navbar-nav">
+	            <li class="active"><a href="#">Home</a></li>
+	            <li><a href="#about">About</a></li>
+	            <li><a href="#contact">Contact</a></li>
+	          </ul>
+	        </div><!--/.nav-collapse -->
+	      </div>
+	    </nav>
+	
+	    <div class="container" ui-view>
+	
+	
+	    </div><!-- /.container -->
+		
+		<hr />
+		<footer>
+			
+			&copy; Project
+			
+		</footer>
+		
+		<!-- inject:js off-->	
+
+
+
+		<!-- endinject off-->	
+
+	
+		<script src="bower_components/jquery/dist/jquery.js"></script>	
+
+		<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>	
+		
+		<script data-main="app/requireConfig" src="bower_components/requirejs-bower/require.js"></script>
+<!--
+		<script src="app/app.js"></script>	
+		<script src="app/main/main.controller.js"></script>	
+
+		<script src="app/main/main.js"></script>	
+
+		<script src="app/modules/appConfig/appConfig.js"></script>	
+
+		<script src="app/modules/appRun/appRun.js"></script>	
+				
+-->
+		
+	</body>
+</html>

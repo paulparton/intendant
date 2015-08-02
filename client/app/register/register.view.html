@@ -1,0 +1,20 @@
+<div class="login-form">
+	
+	<h2>Register</h2>
+
+	<hr />
+
+	<form ng-submit="registerController.registerUser();">
+
+		<label for="username">Username</label>
+		<input type="text" class="form-control" name="username" ng-model="registerController.newUser.username" />
+		<label for="email">Email</label>
+		<input type="email" class="form-control" name="email" ng-model="registerController.newUser.email" />			
+		<label for="password">Password</label>
+		<input type="password" class="form-control" name="password" ng-model="registerController.newUser.password" />	
+                 		
+		<button class="btn btn-lg btn-primary btn-block" type="submit" ng-click="registerController.registerUser();">Sign in</button>
+		
+	</form>
+
+</div>

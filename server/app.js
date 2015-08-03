@@ -4,9 +4,12 @@ var express = require('express'),
 	
 	passport = require('passport'),
   LocalStrategy = require('passport-local').Strategy,
-   
+  User = require('./api/users/user.model'),
 	expressSession = require('express-session'),
 	bcrypt = require('bcrypt-nodejs'),
+  
+  middleware,
+  
 	//Configure express routes
 	routes;
 
@@ -21,115 +24,12 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
+middleware = require('./middleware')(app);
 routes = require('./routes')(app);
-
-passport.serializeUser(function(user, done) {
-  done(null, user._id);
-});
- 
-passport.deserializeUser(function(id, done) {
-  User.findById(id, function(err, user) {
-    done(err, user);
-  });
-});
-
-var isValidPassword = function(user, password){
-  return bcrypt.compareSync(password, user.password);
-}
-var createHash = function(password){
- return bcrypt.hashSync(password, bcrypt.genSaltSync(10), null);
-}
-
-// passport/login.js
-passport.use('login', new LocalStrategy({
-    passReqToCallback : true
-  },
-  function(req, email, password, done) {
-    // check in mongo if a user with username exists or not
-    User.findOne({ 'email' :  email }, 
-      function(err, user) {
-        // In case of any error, return using the done method
-        if (err)
-          return done(err);
-        // Username does not exist, log error & redirect back
-        if (!user){
-          console.log('User Not Found with username '+username);
-          return done(null, false, 
-                req.flash('message', 'User Not found.'));                 
-        }
-        // User exists but wrong password, log the error 
-        if (!isValidPassword(user, password)){
-          console.log('Invalid Password');
-          return done(null, false, 
-              req.flash('message', 'Invalid Password'));
-        }
-        // User and password both match, return user from 
-        // done method which will be treated like success
-        return done(null, user);
-      }
-    );
-  }));
-
-passport.use('signup', new LocalStrategy({
-    passReqToCallback : true
-  },
-  function(req, email, password, done) {
-      
-      var username = req.body.username;
-      
-      console.log('register...', email, password);
-      
-    findOrCreateUser = function(){
-      // find a user in Mongo with provided username
-      User.findOne({'email':email},function(err, user) {
-        // In case of any error return
-        if (err){
-          console.log('Error in SignUp: '+err);
-          return done(err);
-        }
-        // already exists
-        if (user) {
-          console.log('User already exists');
-          return done(null, false);
-        } else {
-          // if there is no user with that email
-          // create the user
-          var newUser = new User();
-          // set the user's local credentials
-          newUser.username = username;
-          newUser.password = createHash(password);
-          newUser.email = req.param('email');
- 
-          // save the user
-          newUser.save(function(err) {
-            if (err){
-              console.log('Error in Saving user: '+err);  
-              throw err;  
-            }
-            console.log('User Registration succesful');    
-            return done(null, newUser);
-          });
-        }
-      });
-    };
-     
-    // Delay the execution of findOrCreateUser and execute 
-    // the method in the next tick of the event loop
-    process.nextTick(findOrCreateUser);
-    
-  }));
 
 
 //Configure database
 mongoose.connect('mongodb://localhost/intendant');
-
-//Create model
-var User = mongoose.model('User', { 
-	username: String,
-	password: String,
-	email: String 
-});
-
 
 //Start the server
 app.listen(1337);

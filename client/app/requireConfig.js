@@ -46,6 +46,7 @@ require([
 	'login/login',
 	'register/register',
 	'tasks/tasks',
+	'modules/navbar/navbar.controller'
 	], function(){
 	angular.bootstrap(document, ['intendant']);
 });

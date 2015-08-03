@@ -27,17 +27,18 @@ function authFactory($location, $rootScope, $http, User, $cookieStore, $q) {
         var cb = callback || angular.noop;
         var deferred = $q.defer();
 
-        $http.post('/api/auth/login', {
+        $http.post('/api/auth/login/local', {
           email: user.email,
           password: user.password,
           username: user.username
         }).
         success(function(data) {
-          $cookieStore.put('token', 'totesloggedinbro!');
+          console.log('token bro? ',data);
+          $cookieStore.put('token', data.token);
           var x = $cookieStore.get('token');
-          console.log('logged in!', x, data);
+
           currentUser = User.get();
-          console.log('user: ', currentUser);
+
           deferred.resolve(data);
           return cb();
         }).

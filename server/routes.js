@@ -9,7 +9,7 @@ function createRoutes(app){
 	//Application routes
 	app.use('/api/tasks', require('./api/tasks'));
 	app.use('/api/auth', require('./api/auth'));
-	
+	app.use('/api/users', require('./api/users'));
 	
 	//Configure all other routes to show client application
 	app.use("/styles", express.static(__dirname + "/../app/js"));

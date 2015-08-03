@@ -1,22 +1,10 @@
 var express = require('express'),
     passport = require('passport'),
+    controller = require('./auth.controller'),
     router = express.Router();
 
-
-  /* Handle Login POST */
-  router.post('/login', passport.authenticate('login'), function(req, res){
-    console.log('register: ', req.user);
-    res.send(200, req.user);    
-    
-  });
-
-  /* Handle Registration POST */
-  router.post('/register', passport.authenticate('signup'), function(req, res){
-    
-    console.log('register: ', req.user);
-    
-    res.send(200, req.user);
-    
-  });
+    router.post(['/login/local'], passport.authenticate('local'), controller.localLoginSuccess);
+    router.post('/login/facebook', passport.authenticate('facebook'), controller.facebookLoginSuccess);
+      
  
   module.exports = router;  

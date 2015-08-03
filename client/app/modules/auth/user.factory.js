@@ -9,7 +9,7 @@ define(function(require, exports, module) {
 	userFactory.$inject = ['$resource'];
 	
 	function userFactory($resource) {
-    return $resource('/api/auth/register/:id/:controller', {
+    return $resource('/api/users/:id/:controller', {
       id: '@_id'
     },
     {

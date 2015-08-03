@@ -1,10 +1,10 @@
 <div class="login-form">
-	
+		<strong>{{loginController.errorMessage}}</strong>
 		<div style="width:100%;text-align:center;font-size:4em;"><span class="glyphicon glyphicon-user" style=""" aria-hidden="true"></span></div>
 <hr />
 		<form>
-			<label for="username">Username</label>
-			<input type="text" class="form-control" name="username" ng-model="loginController.user.username" />
+			<label for="email">Email</label>
+			<input type="email" class="form-control" name="email" ng-model="loginController.user.email" />
 			<label for="password">Password</label>
 			<input type="password" class="form-control" name="password" ng-model="loginController.user.password" />	
         <div class="checkbox">

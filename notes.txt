@@ -1,0 +1,14 @@
+Intendant: A multi-user / team task manager with alerts/notifications.
+
+Stage 1:
+Users register with un/pw
+User can add / modify tasks
+Each task can have a due date, a to do list and a summary
+
+Stage 2:
+Users can register with social media accounts
+Users can get notifications when tasks are due
+
+Stage 3:
+Users can setup custom alerts / notifications independant of tasks
+Users can create, join and invite others to join groups

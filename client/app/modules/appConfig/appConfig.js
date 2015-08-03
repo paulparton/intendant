@@ -1,16 +1,18 @@
 define([
-	'app'
-], function(app){
+	'app',
 	
-	configureApplication.$inject = ['$stateProvider', '$urlRouterProvider', '$couchPotatoProvider', '$locationProvider'];
+], function(app, authInterceptor){
 	
-	function configureApplication($stateProvider, $urlRouteProvider,  $couchPotatoProvider, $locationProvider){
+	configureApplication.$inject = ['$stateProvider', '$urlRouterProvider', '$couchPotatoProvider', '$locationProvider', '$httpProvider'];
+	
+	function configureApplication($stateProvider, $urlRouteProvider,  $couchPotatoProvider, $locationProvider, $httpProvider){
 	
 		//Default route
 		$urlRouteProvider.otherwise('/');
 		
 		$locationProvider.html5Mode(true);
 		
+		$httpProvider.interceptors.push('authInterceptor');
 		//Routes are configured in route folders
 
 	}

@@ -1,4 +1,6 @@
 {
+  "name": "Intendant",
+  "main": "server/app.js",
   "devDependencies": {
     "bower": "^1.4.1",
     "gulp": "^3.9.0",
@@ -16,6 +18,18 @@
     "stream-series": "^0.1.1"
   },
   "dependencies": {
-    "gulp-sass": "^2.0.4"
-  }
+    "bcrypt-nodejs": "0.0.3",
+    "body-parser": "^1.13.3",
+    "express": "^4.13.2",
+    "express-session": "^1.11.3",
+    "gulp-sass": "^2.0.4",
+    "mongoose": "^4.1.0",
+    "passport": "^0.2.2",
+    "passport-local": "^1.0.0"
+  },
+  "scripts": {
+    "start": "node server/app.js",
+    "test": ""
+  },
+  "private": true
 }

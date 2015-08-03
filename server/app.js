@@ -44,9 +44,9 @@ var createHash = function(password){
 passport.use('login', new LocalStrategy({
     passReqToCallback : true
   },
-  function(req, username, password, done) {
+  function(req, email, password, done) {
     // check in mongo if a user with username exists or not
-    User.findOne({ 'username' :  username }, 
+    User.findOne({ 'email' :  email }, 
       function(err, user) {
         // In case of any error, return using the done method
         if (err)
@@ -73,10 +73,15 @@ passport.use('login', new LocalStrategy({
 passport.use('signup', new LocalStrategy({
     passReqToCallback : true
   },
-  function(req, username, password, done) {
+  function(req, email, password, done) {
+      
+      var username = req.body.username;
+      
+      console.log('register...', email, password);
+      
     findOrCreateUser = function(){
       // find a user in Mongo with provided username
-      User.findOne({'username':username},function(err, user) {
+      User.findOne({'email':email},function(err, user) {
         // In case of any error return
         if (err){
           console.log('Error in SignUp: '+err);
@@ -85,8 +90,7 @@ passport.use('signup', new LocalStrategy({
         // already exists
         if (user) {
           console.log('User already exists');
-          return done(null, false, 
-             req.flash('message','User Already Exists'));
+          return done(null, false);
         } else {
           // if there is no user with that email
           // create the user

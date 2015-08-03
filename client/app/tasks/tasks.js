@@ -14,6 +14,7 @@ define(function(require, exports, module) {
 				templateUrl: 'app/tasks/tasks.view.html',
 				controller: 'tasksController',
 				controllerAs: 'tasksController',
+				authenticate: true,
 	            resolve: {
 	              dummy: $couchPotatoProvider.resolveDependencies(['tasks/tasks.controller'])
 	            }			

@@ -5,7 +5,7 @@ var express = require('express'),
 
   /* Handle Login POST */
   router.post('/login', passport.authenticate('login'), function(req, res){
-    
+    console.log('register: ', req.user);
     res.send(200, req.user);    
     
   });

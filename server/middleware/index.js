@@ -2,7 +2,8 @@ module.exports = middlewareConfig;
 
 var Users = require('../api/users/user.model'),
 		auth = require('./auth'),
-		bodyParser = require('body-parser');
+		bodyParser = require('body-parser'),
+		expressSession = require('express-session');
 
 function middlewareConfig(app){
 

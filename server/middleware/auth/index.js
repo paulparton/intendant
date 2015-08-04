@@ -1,24 +1,21 @@
 var passport = require('passport'),
-	User = require('../../api/users/user.model');
+		expressSession = require('express-session');
 
-exports.init = function(userModel){
+exports.init = function(userModel, app){
 
-	var local = require('./local-strategy').setup(userModel);
-		//facebook = require('./facebook');
-	
+	app.use(passport.initialize());
+	app.use(passport.session());
+
+	passport.use(require('./local-strategy').setup(userModel));
+
 	passport.serializeUser(function(user, done) {
-		console.log('serialize this motherfucker! ', user);
 	  done(null, user._id);
 	});
-	 
+
 	passport.deserializeUser(function(id, done) {
-		console.log('de-serialize this motherfucker! ', id);
-	  User.findById(id, function(err, user) {
+	  userModel.findById(id, function(err, user) {
 	    done(err, user);
 	  });
 	});
 
-
-	passport.use(local);
-			
 };

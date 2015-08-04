@@ -9,6 +9,13 @@ var compose = require('composable-middleware');
 var User = require('../api/users/user.model');
 var validateJwt = expressJwt({ secret: config.secrets.session });
 
+module.exports = {
+  isAuthenticated: isAuthenticated,
+  hasRole: hasRole,
+  signToken: signToken,
+  setTokenCookie: setTokenCookie
+}
+
 /**
  * Attaches the user object to the request if authenticated
  * Otherwise returns 403
@@ -57,9 +64,9 @@ function hasRole(roleRequired) {
  * Returns a jwt token signed by the app secret
  */
 function signToken(id) {
-  
+
   console.log('sign this mother fucker', id, config.secrets.session);
-  
+
   return jwt.sign({ _id: id }, config.secrets.session, { expiresInMinutes: 60*5 });
 }
 
@@ -72,8 +79,3 @@ function setTokenCookie(req, res) {
   res.cookie('token', JSON.stringify(token));
   res.redirect('/');
 }
-
-exports.isAuthenticated = isAuthenticated;
-exports.hasRole = hasRole;
-exports.signToken = signToken;
-exports.setTokenCookie = setTokenCookie;

@@ -1,0 +1,34 @@
+<nav class="navbar navbar-inverse navbar-fixed-top">
+  <div class="container" ng-controller="navbar as navbar">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="#">Project name</a>
+    </div>
+    <div id="navbar" class="collapse navbar-collapse">
+      <ul class="nav navbar-nav">
+        <li class="active"><a href="/">Home</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="#contact">Contact</a></li>
+		<li ng-hide="!navbar.isAuth()" id="user-logout-button"><a href="#" ng-click="navbar.logout();">Logout</a></li>
+    <li ng-hide="navbar.isAuth()" id="user-login-button"><a href="/login">Login</a></li>
+      </ul>
+      <ul ng-hide="!navbar.isAuth()" class="nav navbar-nav navbar-right" id="user-profile-menu">
+        <li>    
+          <a class="dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">
+            <div class="user-icons"> <span class="glyphicon glyphicon-user" aria-hidden="true"></span></div> {{navbar.getCurrentUser().email}} <span class="caret"></span>
+          </a>
+          <ul class="dropdown-menu">
+            <li><a href="#">profile</a></li>
+            <li><a href="#">settings</a></li>
+            <li><a href="#" ng-click="navbar.logout();">logout</a></li>
+          </ul>
+        </li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div>
+</nav>

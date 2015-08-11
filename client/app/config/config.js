@@ -1,9 +1,8 @@
-/**
-define([
-	'app',
+define(function(require, exports, module) {
 	
-], function(app, authInterceptor){
-	
+	var app = require('app'),
+		authInterceptor = require('authInterceptor');
+
 	configureApplication.$inject = ['$stateProvider', '$urlRouterProvider', '$couchPotatoProvider', '$locationProvider', '$httpProvider'];
 	
 	function configureApplication($stateProvider, $urlRouteProvider,  $couchPotatoProvider, $locationProvider, $httpProvider){
@@ -14,6 +13,7 @@ define([
 		$locationProvider.html5Mode(true);
 		
 		$httpProvider.interceptors.push('authInterceptor');
+		
 		//Routes are configured in route folders
 
 	}
@@ -23,5 +23,3 @@ define([
 	return configureApplication;
 	
 });
-
- */

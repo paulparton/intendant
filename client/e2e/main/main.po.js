@@ -1,7 +1,7 @@
 var mainPage = function(){
 	
 	//navigation container
-	this.navContainer = element(by.id('nav'));
+	this.navContainer = element(by.id('navbar'));
 	
 	//logged in menu items
 	this.userProfileMenu = this.navContainer.element(by.css('#user-profile-menu'));

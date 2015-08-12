@@ -44,9 +44,11 @@ require([
 	'config/run',
 	'main/main',
 	'login/login',
+	'logout/logout',
 	'register/register',
 	'tasks/tasks',
-	'modules/navbar/navbar.controller'
+	'modules/navbar/navbar.controller',
+	'modules/tasks/tasks.service',
 	], function(){
 	angular.bootstrap(document, ['intendant']);
 });

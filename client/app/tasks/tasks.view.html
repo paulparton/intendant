@@ -1,3 +1,11 @@
-Tasks and tasks and tasks and tasks...
+<h1>Tasks</h1>
 
-<button ng-click="tasksController.logout()">Logout</button>
+
+
+<a ui-sref="newTask()" class="btn btn-primary" type="button"><span class="glyphicon glyphicon-plus-sign right" aria-hidden="true"></span> &nbsp;Add new task</a>
+
+
+<div class="list-group tasks-list">
+	<a class="list-group-item list-group-item-hover" ng-repeat="task in tasksController.tasks" ui-sref="task({id:task._id})">{{task.name}}</a>
+</div>	
+

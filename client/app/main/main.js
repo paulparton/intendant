@@ -18,16 +18,6 @@ define(function(require, exports, module) {
 	              dummy: $couchPotatoProvider.resolveDependencies(['main/main.controller'])
 	            }			
 			})
-			.state('mainName', {
-				url: '/mainName',
-				templateUrl: 'app/main/main.view.html',
-				controller: 'mainController',
-				controllerAs: 'mainController',
-	            resolve: {
-	              dummy: $couchPotatoProvider.resolveDependencies(['main/main.controller'])
-	            }			
-			});			
-		
 	}	
 	
 	

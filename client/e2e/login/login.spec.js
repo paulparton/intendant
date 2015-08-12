@@ -4,21 +4,27 @@ describe('The login page', function(){
 	
 	beforeEach(function(){
 		
-		browser.get('http://127.0.0.1:1337/login');
+		//Require the Login Page page object
 		loginPage = require('./login.po');
-
+		
+		//Make sure no user is logged in
+		loginPage.logout;
+		
+		//Navigate to the login page
+		loginPage.get();
+		
 	});
 	
 	
 	it('Should raise an error if an unknown email and password combination are submitted', function(){
 		
-		loginPage.login('test@test.com', 'test').then(function(){
+		loginPage.login('test@test.com1234', 'test1234').then(function(){
 			
 			browser.getCurrentUrl().then(function(url) {
-				expect(url).toBe('/login');
+				expect(url).toBe('http://127.0.0.1:1337/login');
   			});
   		
-		},10000)
+		})
 		
 	});
 
@@ -41,10 +47,10 @@ describe('The login page', function(){
 		loginPage.login('test@test.com', 'test').then(function(){
 			
 			browser.getCurrentUrl().then(function(url) {
-				expect(url).toBe('/');
+				expect(url).toBe('http://127.0.0.1:1337/tasks');
   			});
   		
-		},10000)
+		});
 		
 	});
 		

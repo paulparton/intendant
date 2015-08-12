@@ -4,16 +4,38 @@ define(function(require, exports, module) {
 	
 	app.registerController('tasksController', tasksController);
 
-	tasksController.$inject = ['$location', 'Auth'];
+	tasksController.$inject = ['$location', 'Auth', 'tasks'];
 
-	function tasksController($location, Auth){
+	function tasksController($location, Auth, tasks){
 		
 		var vm = this;
 		
-		vm.logout = function() {
-	      Auth.logout();
-	      $location.path('/login');
-	    };
+		vm.loadTasks = loadTasks;
+
+		
+		vm.loadTasks();
+		
+
+		
+		function loadTasks(){
+			
+			tasks.query(querySuccess, queryError);
+			
+		}
+		
+		function querySuccess(result){
+			
+			vm.tasks = result;
+			
+		}
+		
+		function queryError(err){
+			
+			console.log('error loading tasks from server: ', err);
+				
+		}
+
+		
 	}	
 	
 });

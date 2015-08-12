@@ -21,7 +21,9 @@ var gulp = require('gulp')
     minifyCss = require('gulp-minify-css'),
     sass = require('gulp-sass'),
     watch = require('gulp-watch'),
-    clean = require('gulp-clean');
+    clean = require('gulp-clean'),
+    nodemon = require('gulp-nodemon'),
+    protractor = require('gulp-protractor').protractor;
 
 /**Configuration */
 var configuration = {};
@@ -164,6 +166,30 @@ gulp.task('clean', function () {
 
 
 //Start the application
-gulp.task('default', ['clean'], function(){
-    gulp.start('watch');
+//gulp.task('default', ['clean'], function(){
+    //gulp.start('watch');
+//});
+
+gulp.task('e2eTest', function(){
+
+ 
+    gulp.src(["./client/e2e/**/*spec.js"])
+        .pipe(protractor({
+            configFile: "./protractor.conf.js",
+            args: ['--baseUrl', 'http://127.0.0.1:1337']
+        }))
+        .on('error', function(e) { throw e })
+    
+});
+
+
+
+gulp.task('default', function(){
+    
+    nodemon({
+        script: 'server/app.js',
+        ext: 'js html',
+        env: {'NODE_ENV': 'development'}
+    })
+    
 });

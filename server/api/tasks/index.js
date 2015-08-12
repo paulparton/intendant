@@ -1,13 +1,13 @@
-var express = require('express');
+var express = require('express'),
+	controller = require('./tasks.controller'),
+	router = express.Router();
 
-var router = express.Router();
 
-router.get('/', function(req, res){
-	res.send('tasks index!');
-});
+router.get('/', controller.index);
+router.get('/:id', controller.getTask);
+router.post('/', controller.newTask);
+router.put('/:id', controller.updateTask);
+router.delete('/:id', controller.deleteTask);
 
-router.get('/wig', function(req, res){
-	res.send('YOUR MOMS CHEST HAIR!');
-});
 
 module.exports = router;

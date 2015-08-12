@@ -1,55 +1,49 @@
-'use strict';
-
-
-describe('The main template / home page', function(){
+describe('The main template', function(){
 	
-	var mainPage;
+	var mainPage,
+		loginPage;
 	
 	beforeEach(function(){
 		
-		var url = '/';
-		
-		browser.get(url);
-		
+		mainPage = require('./main.po');
+		loginPage = require('../login/login.po');
 					
 	});
 	
-	describe('User logged in', function(){
+	describe('When a user logged in', function(){
 		
 		beforeEach(function(){
 			
-			mainPage = require('main.po');
+			//Navigate to the login page
+			loginPage.get();
 			
-			mainPage.usernameInput.sendKeys(username);
-			mainPage.passwordInput.sendKeys(password);			
-			mainPage.loginButton.click();
+			//Log the user in
+			loginPage.login('test@test.com', 'test');
 			
-		});
-		
-		it('Should display the logout button and profile menu', function(){
-			
-			//check that logout button and profile menu is displayed
-			expect(mainBody.logoutButton.isDisplayed()).toBeTruthy();
-			expect(mainBody.profileMenu.isDisplayed()).toBeTruthy();
+			//Wait for the user login to complete
+			browser.waitForAngular();
 			
 		});
 		
-		it('Should hide the user menu and log out button when the user logs out', function(){
-			
-			//Log the user our
-			mainPage.logoutButton.click().then(function(){
-				
-				//check that logout button and profile menu is not displayed
-				expect(mainBody.logoutButton.isDisplayed()).toBeFalsy();
-				expect(mainBody.profileMenu.isDisplayed()).toBeFalsy();
-				
-			});
-			
+		it('Should display the logout button', function(){
+
+			//check that logout button is not displayed
+			expect(mainPage.logoutButton.isDisplayed()).toBeTruthy();
+
 		});
+
+		it('Should display the profile menu', function(){
+
+			//check that profile menu is not displayed
+			expect(mainPage.userProfileMenu.isDisplayed()).toBeTruthy();
+
+		});
+		
+
 		
 		it('Should display the users tasks', function(){
 			
-			expect(mainBody.userTasks.isDisplayed()).toBeTruthy();
+			//expect(mainPage.userTasks.isDisplayed()).toBeTruthy();
 			
 		});
 		
@@ -63,16 +57,28 @@ describe('The main template / home page', function(){
 		
 		beforeEach(function(){
 			
-			mainPage = require('main.po');
+			//Make sure no user is logged in
+			loginPage.logout();
+			
+			//Wait for logout
+			browser.waitForAngular();
 			
 		});
 		
-		it('Should not display the logout button and profile menu, function(){
+		it('Should not display the logout button', function(){
 
-			//check that logout button and profile menu is not displayed
-			
+			//check that logout button is not displayed
+			expect(mainPage.logoutButton.isDisplayed()).toBeFalsy();
+
 		});
-		
+
+		it('Should not display the profile menu', function(){
+
+			//check that profile menu is not displayed
+			expect(mainPage.userProfileMenu.isDisplayed()).toBeFalsy();
+
+		});
+					
 		it('Should not display any of the user specific boxes', function(){
 			
 		});

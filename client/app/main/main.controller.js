@@ -5,19 +5,20 @@ define(function(require, exports, module) {
 		
 	app.registerController('mainController', mainController);
 
-	mainController.$inject = ['$timeout', '$scope'];
+	mainController.$inject = ['$location','Auth'];
 
-	function mainController($timeout, $scope){
+	function mainController($location, Auth){
 		
 		var vm = this;
-	
-		vm.test = "test";
 		
-		vm.items = [
-			"first",
-			"second",
-			"third"
-		];
+		if(Auth.isLoggedIn()){
+			console.log('user is logged in!');
+			$location.path('/tasks')
+		}else{
+			console.log('You shal not paaa. You shall not paa.papapa.. you shall not paaaaaaaa....');
+			$location.path('/login')
+		}
+
 		
 	}	
 

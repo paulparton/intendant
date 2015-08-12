@@ -5,6 +5,9 @@ var homePage = function(){
 	
 	//logged-in elements
 	
+	this.get = function(){
+		return browser.get('/');
+	}
 };
 
-module.exports = new loginPage();
+module.exports = new homePage();
